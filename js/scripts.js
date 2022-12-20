@@ -43,12 +43,12 @@ const generarHtmlTarea = (tarea) =>{
     //ELEMENTO CONTENEDOR DE LA TAREA
     let retorno = document.createElement('div');
     retorno.setAttribute('class','card text-center');
+    retorno.setAttribute('id',`borrar-${tarea.id}`);
 
     //GENERO EL BOTON PARA BORRARLO
     let btn = document.createElement('button');
     btn.setAttribute('class','btn-close');
     btn.setAttribute('id',`${tarea.id}`);
-    btn.addEventListener('click',borrarTarea);
 
     //HEADER 
     let header = document.createElement('div');
@@ -99,6 +99,10 @@ const encolarTarea = (event) => {
 
     htmlTareasEnCola.appendChild(htmlTarea);
 
+
+    let btn = document.getElementById(`${nueva.id}`);
+    btn.addEventListener('click',borrarTarea);
+
 }
 
 const borrarTarea = (event) =>{
@@ -107,8 +111,11 @@ const borrarTarea = (event) =>{
     tareas = tareas.filter(tarea => tarea.id != tareaBorrar);
 
     //BORRO DEL HTML
-    let elementoBorrar = document.getElementById(`${tareaBorrar}`);
-    document.removeChild(elementoBorrar);
+    let elementoBorrar = document.getElementById(`borrar-${tareaBorrar}`);
+    
+
+    let contenedor = document.getElementById('tareasEnCola');
+    contenedor.removeChild(elementoBorrar);
 
 }
 
