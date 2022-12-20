@@ -42,12 +42,12 @@ const generarHtmlTarea = (tarea) =>{
 
     //ELEMENTO CONTENEDOR DE LA TAREA
     let retorno = document.createElement('div');
-    retorno.setAttribute('id',`${tarea.id}`);
     retorno.setAttribute('class','card text-center');
 
     //GENERO EL BOTON PARA BORRARLO
     let btn = document.createElement('button');
     btn.setAttribute('class','btn-close');
+    btn.setAttribute('id',`${tarea.id}`);
     btn.addEventListener('click',borrarTarea);
 
     //HEADER 
@@ -83,7 +83,7 @@ const calcularFecha = (fecha1, fecha2) => {
 }
 
 
-const encolarTarea = (e) => {
+const encolarTarea = (event) => {
 
     //GENERO LA TAREA NUEVA
     let nueva = obtenerTareaNueva();
@@ -101,8 +101,15 @@ const encolarTarea = (e) => {
 
 }
 
-const borrarTarea = (e) =>{
-    console.log(e);
+const borrarTarea = (event) =>{
+    //BORRO DE LA LISTA
+    let tareaBorrar = event.currentTarget.id;
+    tareas = tareas.filter(tarea => tarea.id != tareaBorrar);
+
+    //BORRO DEL HTML
+    let elementoBorrar = document.getElementById(`${tareaBorrar}`);
+    document.removeChild(elementoBorrar);
+
 }
 
 let btnAgregarTarea = document.getElementById('iCrearTarea');
